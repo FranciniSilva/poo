@@ -9,28 +9,27 @@ type ContaCorrente struct {
 	saldo         float64
 }
 
+func (c *ContaCorrente) Sacar(valorDoSaque float64) string {
+	podeSacar := valorDoSaque > 0 && valorDoSaque <= c.saldo
+
+	if podeSacar {
+		c.saldo -= valorDoSaque
+		return "Saque realizado com sucesso!"
+	} else {
+		return "Saldo insuficiente!"
+	}
+}
+
 func main() {
 
-	contaDaFrancini := ContaCorrente{titular: "Francini", numeroAgencia: 859, numeroConta: 123456, saldo: 500}
-	contaDaFrancini2 := ContaCorrente{titular: "Francini", numeroAgencia: 859, numeroConta: 123456, saldo: 500}
-	// contaDaCarol := ContaCorrente{titular: "Carol", numeroAgencia: 859, numeroConta: 111222, saldo: 5080}
-	// contaDaCarol2 := ContaCorrente{titular: "Carol", numeroAgencia: 859, numeroConta: 111222, saldo: 5080}
-	fmt.Println(contaDaFrancini == contaDaFrancini2)
+	contaDaSilvia := ContaCorrente{}
+	contaDaSilvia.titular = "Silvia"
+	contaDaSilvia.saldo = 500
 
-	var contaDaCris *ContaCorrente
-	contaDaCris = new(ContaCorrente)
-	contaDaCris.titular = "Cris"
-	contaDaCris.saldo = 500
+	fmt.Println(contaDaSilvia.saldo)
 
-	// fmt.Println(*contaDaCris)
+	fmt.Println(contaDaSilvia.Sacar(-100))
 
-	var contaDaCris2 *ContaCorrente
-	contaDaCris = new(ContaCorrente)
-	contaDaCris.titular = "Cris"
-	contaDaCris.saldo = 500
+	fmt.Println(contaDaSilvia.saldo)
 
-	fmt.Println(contaDaCris == contaDaCris2)
-	fmt.Println(&contaDaCris)
-	fmt.Println(&contaDaCris2)
-	fmt.Println(*contaDaCris == *contaDaCris2)
 }
